@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <!--<script src="js/react.min.js"></script>-->
+  <script src="js/react-with-addons.min.js"></script>
+  <script src="js/react-dom.min.js"></script>
+  <script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+
+  <title></title>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+  var Firs=React.createClass({
+    mixins:[React.addons.LinkedStateMixin],
+    /*初始化组件状态*/
+    getInitialState:function(){
+      return{
+        med:this.props.value
+      }
+    },
+    render:function(){
+      return(
+        <div>
+          <h1>hello{this.props.user}</h1>
+          <input type="text" valueLink={this.linkState('mes')}/>
+          <input type="button" value={this.props.sendname}/>
+          <p>{this.state.mes}</p>
+          <ul>
+            {
+              this.props.listsArr.map(function(item,index){
+                  return <li key={index}>{item}</li>
+              })
+            }
+          </ul>
+        </div>
+      );
+    },
+    changeHandle:function(ev){
+      this.setState({mes:ev.target.value});
+    }
+  });
+  var obj={
+    user:'杜拉拉',
+    sendname:'留言',
+    values:'请输入留言信息',
+    listsArr:['我是谁','皮卡丘','蓝精灵','阿伯怪','喇叭芽']
+  }
+    ReactDOM.render(<Firs {...obj}/>,
+          document.getElementById('example')
+    );
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

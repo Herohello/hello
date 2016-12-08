@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+    <script src="js/react-with-addons.min.js"></script>
+    <!--<script src="js/react.min.js"></script>-->
+    <script src="js/react-dom.min.js"></script>
+    <script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+  <title>ddd</title>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        //定义一个组建，名字第一个必须是大写
+        var Firs = React.createClass({
+            mixins:[React.addons.LinkedStateMixin],
+            /*组建的状态*/
+            getInitialState:function(){
+                return{
+                    mes:this.props.value
+                }
+            },
+            render:function(){
+                return(
+                    //必须要有一个大标签包围着才可以
+                    <div>
+                        <h1>Hello {this.props.user}</h1>
+                        <input type="text" name="" valueLink={this.linkState('mes')} />
+                        <input type="button" value={this.props.sendname} />
+                        <p>{this.state.mes}</p>
+                    </div>
+                );
+            },
+            changeHandle:function(ev){
+                //console.log(ev.target.value);
+                this.setState({mes:ev.target.value});
+            }
+        });
+
+        var obj = {
+            user: '夺命雷公狗',
+            sendname :'留言',
+            values : '请输入留言的信息'
+        }
+
+        ReactDOM.render(<Firs {...obj} />, /*这里其实也可以使用双标签的如：<Fir></Fir>  */
+            document.getElementById('example'),
+            function(){
+                alert('页面渲染完成');
+        });
+    </script>
+</body>
+</html>
